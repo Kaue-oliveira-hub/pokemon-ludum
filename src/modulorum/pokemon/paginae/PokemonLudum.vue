@@ -9,10 +9,20 @@
 
 <section v-else class="flex flex-col justify-center items-center w-screen h-screen  bg-green-100">
 <h1 class="m-10 text-3xl ">Who is that Pokemon?</h1>
-<!--<h3 class="capitalize">{{ temerePokemon.nomen }}</h3>-->
+<h3 class="capitalize">{{ ludumStatus }}</h3>
+
+<div class="h-20 relative" @click="sequentiOptiones(4)">
+    
+    <button  v-if="ludumStatus!== LudumStatus.Ludit" class="bg-yellow-400 text-write px-4 py-3 rounded-4xl hover:bg-yellow-300  transition absolute left-32 20 ">Play again?</button>
+</div>
 
 <PokemonImago :pokemon-id="temerePokemon.id" :revelare-pokemon="ludumStatus !== LudumStatus.Ludit"/>
-<PokemonOptiones :optiones ="optiones"  @electus-optio="examineResponsio"/>
+<PokemonOptiones 
+:optiones ="optiones"  
+@electus-optio="examineResponsio"
+:non-eligere="ludumStatus !== LudumStatus.Ludit"
+:recte-responsio="temerePokemon.id"
+/>
 </section>
 
 
@@ -29,12 +39,11 @@ const { ludumStatus,
     estPortat, 
     temerePokemon,
     pokemonOptiones: optiones,
-examineResponsio 
+examineResponsio,
+sequentiOptiones, 
 } = usePokemonLudum();
 
-//const cumElectusOptio = (valorem: number) => {
-//console.log({valorem});
-//}
+
 
 </script>
 
